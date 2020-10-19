@@ -70,8 +70,8 @@ class StreamPage extends Component {
             for (let i = 0; i < sourceInfos.length; i++) {
                 const sourceInfo = sourceInfos[i];
                 if (
-                    sourceInfo.kind == 'videoinput' &&
-                    sourceInfo.facing == (isFront ? 'front' : 'environment')
+                    sourceInfo.kind === 'videoinput' &&
+                    sourceInfo.facing === (isFront ? 'front' : 'environment')
                 ) {
                     videoSourceId = sourceInfo.deviceId;
                 }
@@ -126,30 +126,13 @@ class StreamPage extends Component {
             };
 
             pc.oniceconnectionstatechange = (e) => {
-                // if (pc.iceConnectionState === 'disconnected') {
-                //   const remoteStreams = this.state.remoteStreams.filter(stream => stream.id !== socketID)
-                //   this.setState({
-                //     remoteStream: remoteStreams.length > 0 && remoteStreams[0].stream || null,
-                //   })
-                // }
             };
 
             pc.onaddstream = (e) => {
-                let _remoteStream = null;
                 let remoteStreams = this.state.remoteStreams;
                 let remoteVideo = {};
 
-                // if (e.stream.getTracks().length === 2) alert(e.stream.getTracks()[0].kind)
-
-                // let swappedStream = new MediaStream()
-                // console.log('0...', swappedStream)
-                // e.stream.getAudioTracks() && swappedStream.addTrack(e.stream.getAudioTracks()[0])
-                // console.log('1...', swappedStream)
-                // e.stream.getVideoTracks() && swappedStream.addTrack(e.stream.getVideoTracks()[0])
-                // console.log('2...', swappedStream)
-
                 // 1. check if stream already exists in remoteStreams
-                // const rVideos = this.state.remoteStreams.filter(stream => stream.id === socketID)
 
                 remoteVideo = {
                     id: socketID,
@@ -159,38 +142,9 @@ class StreamPage extends Component {
                 remoteStreams = [...this.state.remoteStreams, remoteVideo];
 
                 // 2. if it does exist then add track
-                // if (rVideos.length) {
-                //   _remoteStream = rVideos[0].stream
-                //   _remoteStream.addTrack(e.track, _remoteStream)
-                //   remoteVideo = {
-                //     ...rVideos[0],
-                //     stream: _remoteStream,
-                //   }
-                //   remoteStreams = this.state.remoteStreams.map(_remoteVideo => {
-                //     return _remoteVideo.id === remoteVideo.id && remoteVideo || _remoteVideo
-                //   })
-                // } else {
-                //   // 3. if not, then create new stream and add track
-                //   _remoteStream = new MediaStream()
-                //   _remoteStream.addTrack(e.track, _remoteStream)
-
-                //   remoteVideo = {
-                //     id: socketID,
-                //     name: socketID,
-                //     stream: _remoteStream,
-                //   }
-                //   remoteStreams = [...this.state.remoteStreams, remoteVideo]
-                // }
-
-                // const remoteVideo = {
-                //   id: socketID,
-                //   name: socketID,
-                //   stream: e.streams[0]
-                // }
 
                 this.setState((prevState) => {
                     // If we already have a stream in display let it stay the same, otherwise use the latest stream
-                    // const remoteStream = prevState.remoteStreams.length > 0 ? {} : { remoteStream: e.streams[0] }
                     const remoteStream =
                         prevState.remoteStreams.length > 0 ? {} : {remoteStream: e.stream};
 
@@ -204,25 +158,18 @@ class StreamPage extends Component {
                         : {selectedVideo: remoteVideo};
 
                     return {
-                        // selectedVideo: remoteVideo,
                         ...selectedVideo,
-                        // remoteStream: e.streams[0],
                         ...remoteStream,
-                        remoteStreams, //: [...prevState.remoteStreams, remoteVideo]
+                        remoteStreams,
                     };
                 });
             };
 
             pc.close = () => {
-                // alert('GONE')
             };
 
             if (this.state.localStream) {
                 pc.addStream(this.state.localStream);
-
-                //   // this.state.localStream.getTracks().forEach(track => {
-                //   //   pc.addTrack(track, this.state.localStream)
-                //   // })
             }
             // return pc
             callback(pc);
@@ -241,7 +188,7 @@ class StreamPage extends Component {
             this.state.remoteStreams.forEach((rVideo) =>
                 this.stopTracks(rVideo.stream),
             );
-        // stop all remote peerconnections
+        // stop all remote peer connections
         if (this.state.remoteStreams)
             this.state.peerConnections &&
             Object.values(this.state.peerConnections).forEach((pc) => pc.close());
@@ -265,7 +212,7 @@ class StreamPage extends Component {
         if (localStream) this.stopTracks(localStream);
         // stop all remote audio & video tracks
         remoteStreams.forEach((rVideo) => this.stopTracks(rVideo.stream));
-        // stop all remote peerconnections
+        // stop all remote peer connections
         peerConnections &&
         Object.values(peerConnections).forEach((pc) => pc.close());
         this.setState({

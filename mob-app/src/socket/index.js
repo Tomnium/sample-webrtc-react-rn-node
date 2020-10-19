@@ -57,8 +57,6 @@ export function socketEvents() {
                     ? {selectedVideo: remoteStreams[0]}
                     : null;
             return {
-                // remoteStream:
-                //   (remoteStreams.length > 0 && remoteStreams[0].stream) || null,
                 remoteStreams,
                 selectedVideo: selectedVideo,
                 status:
