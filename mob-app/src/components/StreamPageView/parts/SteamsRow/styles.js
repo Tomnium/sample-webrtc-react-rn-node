@@ -11,16 +11,21 @@ export default styles = StyleSheet.create({
     },
     videoWrapper: {
         flex: 1,
-        width: '100%',
-        backgroundColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 2,
     },
+    placeHolder: {
+        width: 105,
+        height: 82,
+        backgroundColor: 'gray'
+    },
+    rtcViewLocal: {
+        width: 105,
+        height: 82,
+    },
     rtcViewRemote: {
-        width: 110, //dimensions.width,
-        height: 110, //dimensions.height / 2,
-        // backgroundColor: 'black',
-        borderRadius: 5,
+        width: 110,
+        height: 110,
     },
 });

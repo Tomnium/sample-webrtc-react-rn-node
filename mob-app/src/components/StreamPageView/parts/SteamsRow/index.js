@@ -5,12 +5,27 @@ import styles from './styles';
 
 class StreamsRow extends Component {
     render() {
-        const { remoteStreams, switchVideo } = this.props;
+        const { remoteStreams, switchVideo, localStream, setYourSelfVideoShown, camera } = this.props;
         return (
             <ScrollView
                 horizontal={true}
                 style={styles.scrollView}
             >
+                <TouchableOpacity
+                    onPress={() => setYourSelfVideoShown()}
+                    >
+                    <View style={styles.videoWrapper}>
+                        <View style={styles.placeHolder}>
+                        {camera &&
+                        <Video
+                            style={styles.rtcViewLocal}
+                            objectFit="cover"
+                            streamURL={localStream}
+                        />
+                        }
+                        </View>
+                    </View>
+                </TouchableOpacity>
                 {
                     remoteStreams.map((rStream, index) => (
                         <TouchableOpacity
@@ -19,11 +34,9 @@ class StreamsRow extends Component {
                             <View
                                 style={styles.videoWrapper}>
                                 <Video
-                                    mirror={true}
                                     style={styles.rtcViewRemote}
                                     objectFit="contain"
                                     streamURL={rStream.stream}
-                                    type="remote"
                                 />
                             </View>
                         </TouchableOpacity>

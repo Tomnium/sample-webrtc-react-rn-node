@@ -5,9 +5,11 @@ import styles from './styles';
 
 class YourSelfVideo extends Component {
     render() {
-        const { localStream } = this.props;
+        const { localStream, camera } = this.props;
         return (
             <View style={styles.wrapper}>
+                <View style={styles.placeHolder}>
+                    {camera &&
                 <TouchableOpacity onPress={() => localStream._tracks[1]._switchCamera()}>
                     <Video
                         objectFit="cover"
@@ -16,6 +18,8 @@ class YourSelfVideo extends Component {
                         type="local"
                     />
                 </TouchableOpacity>
+                    }
+                </View>
             </View>
         )
     }
