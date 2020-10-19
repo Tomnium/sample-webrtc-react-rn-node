@@ -58,7 +58,7 @@ class Video extends Component {
 
   }
 
-  muteMic = (e) => {
+  muteMic = () => {
     const stream = this.video.srcObject.getTracks().filter(track => track.kind === 'audio');
     this.setState(prevState => {
       if (stream) stream[0].enabled = !prevState.mic;
@@ -66,7 +66,7 @@ class Video extends Component {
     })
   };
 
-  muteCamera = (e) => {
+  muteCamera = () => {
     const stream = this.video.srcObject.getTracks().filter(track => track.kind === 'video');
     this.setState(prevState => {
       if (stream) stream[0].enabled = !prevState.camera;
@@ -99,12 +99,14 @@ class Video extends Component {
                 <ControlButton
                     onClick={this.muteMic}
                     perm={mic}
+                    className='material-icons'
                 >
                   {mic && 'mic' || 'mic_off'}
                 </ControlButton>
                 <ControlButton
                     onClick={this.muteCamera}
                     perm={camera}
+                    className='material-icons'
                 >
                   {camera && 'videocam' || 'videocam_off'}
                 </ControlButton>

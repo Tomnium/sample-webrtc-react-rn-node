@@ -45,6 +45,7 @@ class StreamPageView extends Component {
                         <YourSelfVideo
                         localStream={localStream}
                         camera={camera}
+                        mic={mic}
                         />
                     }
                     <MainVideo
@@ -52,6 +53,7 @@ class StreamPageView extends Component {
                     />
                     <SteamsRow
                         camera={camera}
+                        mic={mic}
                         switchVideo={switchVideo}
                         remoteStreams={remoteStreams}
                         localStream={localStream}
