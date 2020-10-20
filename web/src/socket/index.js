@@ -1,9 +1,9 @@
 import io from 'socket.io-client';
 import config from '../config';
 
-    export const initSocket = (roomId) => new Promise((res) => {
-        console.log(window.location.pathname);
-        console.log(`/${roomId}`)
+export const initSocket = (roomId) => new Promise((res) => {
+    console.log(window.location.pathname);
+    console.log(`/${roomId}`)
     const socket = io.connect(config.serviceIP, {
         path: "/io/webrtc",
         query: {
@@ -58,7 +58,7 @@ export function socketEvents() {
             // check if disconnected peer is the selected video and if there still connected peers, then select the first
             const selectedVideo =
                 prevState.selectedVideo.id === data.socketID && remoteStreams.length
-                    ? { selectedVideo: remoteStreams[0] }
+                    ? {selectedVideo: remoteStreams[0]}
                     : null;
 
             return {
@@ -157,7 +157,8 @@ export function socketEvents() {
         const pc = this.state.peerConnections[data.socketID];
         pc.setRemoteDescription(
             new RTCSessionDescription(data.sdp)
-        ).then(() => {});
+        ).then(() => {
+        });
     });
 
     this.socket.on("candidate", (data) => {

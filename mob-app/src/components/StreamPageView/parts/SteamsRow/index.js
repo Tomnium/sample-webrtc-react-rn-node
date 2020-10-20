@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import Video from '../../../common/Video';
 import styles from './styles';
@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 class StreamsRow extends Component {
     render() {
-        const { remoteStreams, switchVideo, localStream, setYourSelfVideoShown, camera, mic } = this.props;
+        const {remoteStreams, switchVideo, localStream, setYourSelfVideoShown, camera, mic} = this.props;
         return (
             <ScrollView
                 horizontal={true}
@@ -14,7 +14,7 @@ class StreamsRow extends Component {
             >
                 <TouchableOpacity
                     onPress={() => setYourSelfVideoShown()}
-                    >
+                >
                     <View style={styles.videoWrapper}>
                         <View style={{
                             position: 'absolute',
@@ -22,7 +22,7 @@ class StreamsRow extends Component {
                             bottom: 15,
                             zIndex: 99999
                         }}>
-                            <Icon name={mic ? `microphone`: `microphone-off`} size={15} color="white" />
+                            <Icon name={mic ? `microphone` : `microphone-off`} size={15} color="white"/>
                         </View>
                         <View style={{
                             position: 'absolute',
@@ -30,16 +30,16 @@ class StreamsRow extends Component {
                             bottom: 15,
                             zIndex: 99999
                         }}>
-                            <Icon name={camera ? `camera`: `camera-off`} size={15} color="white" />
+                            <Icon name={camera ? `camera` : `camera-off`} size={15} color="white"/>
                         </View>
                         <View style={styles.placeHolder}>
-                        {camera &&
-                        <Video
-                            style={styles.rtcViewLocal}
-                            objectFit="cover"
-                            streamURL={localStream}
-                        />
-                        }
+                            {camera &&
+                            <Video
+                                style={styles.rtcViewLocal}
+                                objectFit="cover"
+                                streamURL={localStream}
+                            />
+                            }
                         </View>
                     </View>
                 </TouchableOpacity>

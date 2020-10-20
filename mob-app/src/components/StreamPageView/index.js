@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     SafeAreaView,
     StatusBar,
@@ -32,7 +32,7 @@ class StreamPageView extends Component {
 
         return (
             <SafeAreaView style={{flex: 1}}>
-                <StatusBar backgroundColor="teal" barStyle={'dark-content'} />
+                <StatusBar backgroundColor="teal" barStyle={'dark-content'}/>
                 <VideoControls
                     camera={camera}
                     mic={mic}
@@ -42,11 +42,11 @@ class StreamPageView extends Component {
                 />
                 <View style={styles.videosContainer}>
                     {isYourSelfVideoShown &&
-                        <YourSelfVideo
+                    <YourSelfVideo
                         localStream={localStream}
                         camera={camera}
                         mic={mic}
-                        />
+                    />
                     }
                     <MainVideo
                         selectedVideo={selectedVideo}

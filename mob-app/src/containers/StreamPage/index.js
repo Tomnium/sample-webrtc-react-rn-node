@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import {mediaDevices, RTCPeerConnection } from "react-native-webrtc";
+import React, {Component} from 'react';
+import {mediaDevices, RTCPeerConnection} from "react-native-webrtc";
 
 import StreamPageView from '../../components/StreamPageView';
-import { socketEvents } from "../../socket";
+import {socketEvents} from "../../socket";
 
 class StreamPage extends Component {
     constructor(props) {
@@ -187,7 +187,7 @@ class StreamPage extends Component {
             Object.values(this.state.peerConnections).forEach((pc) => pc.close());
     }
 
-    switchVideo = (_video) => this.setState({ selectedVideo: _video });
+    switchVideo = (_video) => this.setState({selectedVideo: _video});
 
     stopTracks = (stream) => {
         stream.getTracks().forEach((track) => track.stop());
@@ -199,7 +199,7 @@ class StreamPage extends Component {
             remoteStreams,
             peerConnections,
         } = this.state;
-        const { setConnect } = this.props;
+        const {setConnect} = this.props;
         // disconnect socket
         this.socket.close();
         if (localStream) this.stopTracks(localStream);
@@ -218,7 +218,7 @@ class StreamPage extends Component {
     };
 
     handleCamera = () => {
-        const { localStream } = this.state;
+        const {localStream} = this.state;
 
         const videoTrack = localStream
             .getTracks()
@@ -227,11 +227,11 @@ class StreamPage extends Component {
         if (!videoTrack) return;
 
         videoTrack.enabled = !videoTrack.enabled;
-        this.setState({ camera: videoTrack.enabled });
+        this.setState({camera: videoTrack.enabled});
     };
 
     handleSound = () => {
-        const { localStream } = this.state;
+        const {localStream} = this.state;
 
         const audioTrack = localStream
             .getTracks()
@@ -240,7 +240,7 @@ class StreamPage extends Component {
         if (!audioTrack) return;
 
         audioTrack.enabled = !audioTrack.enabled;
-        this.setState({ mic: audioTrack.enabled });
+        this.setState({mic: audioTrack.enabled});
     };
 
     setYourSelfVideoShown = () => this.setState((prevState) => ({isYourSelfVideoShown: !prevState.isYourSelfVideoShown}));

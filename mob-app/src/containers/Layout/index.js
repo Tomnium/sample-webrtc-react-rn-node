@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Home from '../Home';
 import StreamPage from '../StreamPage';
 import OverlayLoader from '../../components/common/OverlayLoader';
@@ -16,16 +16,16 @@ class Layout extends Component {
         this.socket = null;
     }
 
-    setConnect = (connect) => this.setState({ connect });
+    setConnect = (connect) => this.setState({connect});
 
-    setRoomId = (roomId) => this.setState({ roomId });
+    setRoomId = (roomId) => this.setState({roomId});
 
-    setLoading = (isLoading) => this.setState({ isLoading });
+    setLoading = (isLoading) => this.setState({isLoading});
 
     setSocket = (socket) => this.socket = socket;
 
     renderPage = () => {
-        const { connect, roomId } = this.state;
+        const {connect, roomId} = this.state;
 
         if (connect) {
             return (
@@ -49,10 +49,10 @@ class Layout extends Component {
     };
 
     render() {
-        const { isLoading } = this.state;
+        const {isLoading} = this.state;
         return (
             <>
-                {isLoading && <OverlayLoader />}
+                {isLoading && <OverlayLoader/>}
                 {this.renderPage()}
             </>
         )

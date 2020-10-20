@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styles from './styles';
 
 class HomeView extends Component {
     render() {
-        const { setRoomId, roomId, handleJoin } = this.props;
+        const {setRoomId, roomId, handleJoin} = this.props;
         return (
             <div
                 style={styles.container}>

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { initSocket, socketEvents } from '../../socket';
+import React, {Component} from 'react';
+import {initSocket, socketEvents} from '../../socket';
 
 import StreamPage from '../../components/StreamPage';
 import HomeView from "../../components/HomeView";
@@ -50,11 +50,11 @@ class Home extends Component {
         }
     }
 
-    setSocket = (socket) => this.setState({ socket })
+    setSocket = (socket) => this.setState({socket})
 
-    setConnect = (connect) => this.setState({ connect });
+    setConnect = (connect) => this.setState({connect});
 
-    setRoomId = (roomId) => this.setState({ roomId });
+    setRoomId = (roomId) => this.setState({roomId});
 
     sendToPeer = (messageType, payload, socketID) => {
         this.socket.emit(messageType, {
@@ -65,7 +65,7 @@ class Home extends Component {
 
     whoIsOnline = () => {
         // let all peers know I am joining
-        this.sendToPeer("onlinePeers", null, { local: this.socket.id });
+        this.sendToPeer("onlinePeers", null, {local: this.socket.id});
     };
 
     getLocalStream = () => {
@@ -99,7 +99,7 @@ class Home extends Component {
             let pc = new RTCPeerConnection(this.state.pc_config);
 
             // add pc to peerConnections object
-            const peerConnections = { ...this.state.peerConnections, [socketID]: pc };
+            const peerConnections = {...this.state.peerConnections, [socketID]: pc};
             this.setState({
                 peerConnections,
             });
@@ -155,7 +155,7 @@ class Home extends Component {
                     const remoteStream =
                         prevState.remoteStreams.length > 0
                             ? {}
-                            : { remoteStream: _remoteStream };
+                            : {remoteStream: _remoteStream};
 
                     // get currently selected video
                     let selectedVideo = prevState.remoteStreams.filter(
@@ -164,7 +164,7 @@ class Home extends Component {
                     // if the video is still in the list, then do nothing, otherwise set to new video stream
                     selectedVideo = selectedVideo.length
                         ? {}
-                        : { selectedVideo: remoteVideo };
+                        : {selectedVideo: remoteVideo};
 
                     return {
                         ...selectedVideo,

@@ -156,7 +156,8 @@ export function socketEvents() {
         const pc = this.state.peerConnections[data.socketID];
         pc.setRemoteDescription(
             new RTCSessionDescription(data.sdp),
-        ).then(() => {});
+        ).then(() => {
+        });
     });
 
     this.socket.on('candidate', (data) => {

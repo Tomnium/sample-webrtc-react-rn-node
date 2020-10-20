@@ -1,8 +1,8 @@
 const express = require('express');
-const io = require('socket.io')({ path: '/io/webrtc' });
+const io = require('socket.io')({path: '/io/webrtc'});
 const config = require('./config');
 const cors = require('cors')
-const { getRoutes } = require('./app');
+const {getRoutes} = require('./app');
 
 
 const app = express();

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import HomeView from '../../components/HomeView';
 import {initSocket} from "../../socket";
 
 class Home extends Component {
     handleJoin = async () => {
-        const { roomId, setLoading, setSocket, setConnect } = this.props;
+        const {roomId, setLoading, setSocket, setConnect} = this.props;
         setLoading(true);
         const socket = await initSocket(roomId);
         if (socket) {
@@ -15,7 +15,7 @@ class Home extends Component {
     };
 
     render() {
-        const { setRoomId, roomId } = this.props;
+        const {setRoomId, roomId} = this.props;
 
         return (
             <HomeView

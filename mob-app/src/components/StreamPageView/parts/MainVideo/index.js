@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Text, View } from "react-native";
+import React, {Component} from 'react';
+import {Text, View} from "react-native";
 import Video from '../../../common/Video';
 import styles from './styles';
 
 class MainVideo extends Component {
     render() {
-        const { selectedVideo } = this.props;
+        const {selectedVideo} = this.props;
         return (
             <View
                 style={styles.mainVideoWrapper}>
