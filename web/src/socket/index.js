@@ -1,11 +1,13 @@
 import io from 'socket.io-client';
 import config from '../config';
 
-export const initSocket = () => new Promise((res) => {
+    export const initSocket = (roomId) => new Promise((res) => {
+        console.log(window.location.pathname);
+        console.log(`/${roomId}`)
     const socket = io.connect(config.serviceIP, {
         path: "/io/webrtc",
         query: {
-            room: window.location.pathname,
+            room: `/${roomId}`,
         },
     });
     if (socket) res(socket);
@@ -77,13 +79,8 @@ export function socketEvents() {
             // 2. Create Offer
             if (pc) {
                 // Send Channel
-                const handleSendChannelStatusChange = () => {
-                };
 
                 const sendChannel = pc.createDataChannel("sendChannel");
-                sendChannel.onopen = handleSendChannelStatusChange;
-                sendChannel.onclose = handleSendChannelStatusChange;
-
                 this.setState((prevState) => {
                     return {
                         sendChannels: [...prevState.sendChannels, sendChannel],
@@ -119,7 +116,6 @@ export function socketEvents() {
 
     this.socket.on("offer", (data) => {
         this.createPeerConnection(data.socketID, (pc) => {
-            pc.addStream(this.state.localStream);
             const sendChannel = pc.createDataChannel("sendChannel");
             this.setState((prevState) => {
                 return {

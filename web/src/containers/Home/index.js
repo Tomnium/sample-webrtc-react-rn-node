@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { initSocket, socketEvents } from '../../socket';
 
-import HomeView from '../../components/HomeView';
+import StreamPage from '../../components/StreamPage';
+import HomeView from "../../components/HomeView";
 
 class Home extends Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class Home extends Component {
         this.state = {
             localStream: null, // used to hold local stream object to avoid recreating the stream everytime a new offer comes
             remoteStream: null, // used to hold remote stream object that is displayed in the main screen
-
+            connect: false,
+            roomId: '',
             remoteStreams: [], // holds all Video Streams (all remote streams)
             peerConnections: {}, // holds all Peer Connections
             selectedVideo: null,
@@ -41,16 +43,22 @@ class Home extends Component {
         this.socketEvents = socketEvents.bind(this)
     }
 
-    async componentDidMount() {
-        this.socket = await initSocket();
-        this.socketEvents();
-    };
+    // async componentDidMount() {
+    //     this.socket = await initSocket(this.state.roomId);
+    //     this.socketEvents();
+    // };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!prevState.disconnected && this.state.disconnected) {
             this.handleDisconnect();
         }
     }
+
+    setSocket = (socket) => this.setState({ socket })
+
+    setConnect = (connect) => this.setState({ connect });
+
+    setRoomId = (roomId) => this.setState({ roomId });
 
     sendToPeer = (messageType, payload, socketID) => {
         this.socket.emit(messageType, {
@@ -203,38 +211,53 @@ class Home extends Component {
         // stop all remote peerconnections
         peerConnections &&
         Object.values(peerConnections).forEach((pc) => pc.close());
+        this.setConnect(false)
     };
 
     stopTracks = (stream) => stream.getTracks().forEach((track) => track.stop());
+
+    handleJoin = async () => {
+        this.socket = await initSocket(this.state.roomId);
+        this.socketEvents();
+        this.setConnect(true)
+    };
 
     render() {
         const {
             status,
             messages,
-            disconnected,
+            connect,
+            roomId,
             localStream,
             peerConnections,
             remoteStreams,
             sendChannels,
         } = this.state;
 
-        if (!this.socket) return <div>Loading...</div>;
-        if (disconnected) return <div>You have successfully Disconnected</div>;
-
+        if (connect) {
+            return (
+                <StreamPage
+                    status={status}
+                    messages={messages}
+                    localStream={localStream}
+                    peerConnections={peerConnections}
+                    remoteStreams={remoteStreams}
+                    sendChannels={sendChannels}
+                    socket={this.socket}
+                    switchVideo={this.switchVideo}
+                    sendToPeer={this.sendToPeer}
+                    updateState={this.updateState}
+                    setConnect={this.setConnect}
+                />
+            )
+        }
         return (
             <HomeView
-                status={status}
-                messages={messages}
-                localStream={localStream}
-                peerConnections={peerConnections}
-                remoteStreams={remoteStreams}
-                sendChannels={sendChannels}
-                socket={this.socket}
-                switchVideo={this.switchVideo}
-                sendToPeer={this.sendToPeer}
-                updateState={this.updateState}
+                roomId={roomId}
+                setRoomId={this.setRoomId}
+                handleJoin={this.handleJoin}
             />
-        )
+        );
     }
 }
 
