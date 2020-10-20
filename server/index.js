@@ -32,46 +32,31 @@ io.on('connection', socket => {
     console.log('connected')
 });
 
-// https://www.tutorialspoint.com/socket.io/socket.io_namespaces.htm
 const peers = io.of('/webrtcPeer');
 
 // keep a reference of all socket connections
-// let connectedPeers = new Map()
 
 peers.on('connection', socket => {
     const room = socket.handshake.query.room;
 
     rooms[room] = rooms[room] && rooms[room].set(socket.id, socket) || (new Map()).set(socket.id, socket);
     messages[room] = messages[room] || [];
-
-    // connectedPeers.set(socket.id, socket)
-
     socket.emit('connection-success', {
         success: socket.id,
         peerCount: rooms[room].size,
         messages: messages[room],
     });
 
-    // const broadcast = () => socket.broadcast.emit('joined-peers', {
-    //   peerCount: connectedPeers.size,
-    // })
     const broadcast = () => {
         const _connectedPeers = rooms[room];
-
         for (const [socketID, _socket] of _connectedPeers.entries()) {
-            // if (socketID !== socket.id) {
             _socket.emit('joined-peers', {
-                peerCount: rooms[room].size, //connectedPeers.size,
+                peerCount: rooms[room].size,
             })
-            // }
         }
     };
     broadcast();
 
-    // const disconnectedPeer = (socketID) => socket.broadcast.emit('peer-disconnected', {
-    //   peerCount: connectedPeers.size,
-    //   socketID: socketID
-    // })
     const disconnectedPeer = (socketID) => {
         const _connectedPeers = rooms[room];
         for (const [_socketID, _socket] of _connectedPeers.entries()) {
@@ -87,7 +72,6 @@ peers.on('connection', socket => {
     });
 
     socket.on('disconnect', () => {
-        // connectedPeers.delete(socket.id)
         rooms[room].delete(socket.id);
         messages[room] = rooms[room].size === 0 ? null : messages[room];
         disconnectedPeer(socket.id)
@@ -97,7 +81,6 @@ peers.on('connection', socket => {
     // NOT REQUIRED
     // ************************************* //
     socket.on('socket-to-disconnect', (socketIDToDisconnect) => {
-        // connectedPeers.delete(socket.id)
         rooms[room].delete(socketIDToDisconnect);
         messages[room] = rooms[room].size === 0 ? null : messages[room];
         disconnectedPeer(socketIDToDisconnect)
@@ -139,16 +122,6 @@ peers.on('connection', socket => {
             }
         }
     });
-
-    // socket.on('offerOrAnswer', (data) => {
-    //   // send to the other peer(s) if any
-    //   for (const [socketID, socket] of connectedPeers.entries()) {
-    //     // don't send to self
-    //     if (socketID !== data.socketID) {
-    //       socket.emit('offerOrAnswer', data.payload)
-    //     }
-    //   }
-    // })
 
     socket.on('candidate', (data) => {
         const _connectedPeers = rooms[room];
