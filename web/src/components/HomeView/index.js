@@ -25,13 +25,7 @@ class HomeView extends Component {
                     <Video
                         videoType="localVideo"
                         videoStyles={{
-                            // zIndex:2,
-                            // position: 'absolute',
-                            // right:0,
                             width: 200,
-                            // height: 200,
-                            // margin: 5,
-                            // backgroundColor: 'black'
                         }}
                         frameStyle={{
                             width: 200,
@@ -50,14 +44,10 @@ class HomeView extends Component {
                     style={{
                         zIndex: 3,
                         position: "absolute",
-                        // margin: 10,
-                        // backgroundColor: '#cdc4ff4f',
-                        // padding: 10,
-                        // borderRadius: 5,
                     }}
                 >
                     <i
-                        onClick={(e) => {
+                        onClick={() => {
                             updateState({disconnected: true});
                         }}
                         style={{cursor: "pointer", paddingLeft: 15, color: "red"}}

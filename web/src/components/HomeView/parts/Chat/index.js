@@ -41,7 +41,6 @@ const Chat = props => {
   };
 
   const renderMessage = (userType, data) => {
-    console.log('===========', data);
     const message = data.message;
 
     const msgDiv = data.type === 'text'
@@ -63,7 +62,6 @@ const Chat = props => {
                     className="message"
                     style={{
                         width: 200,
-                        // height: 100
                         cursor: 'pointer',
                     }}
                     src={message.data} />
@@ -104,7 +102,6 @@ const Chat = props => {
               top: 190,
               bottom: 140,
               width: 350,
-              // height: 650,
           }}>
               <ul className="chat" id="chatList">
                   {props.messages.map(data => (
@@ -122,8 +119,6 @@ const Chat = props => {
                   sendFiles={(files) => {
                       const reader = new FileReader();
                       reader.onload = (e) => {
-                          //https://blog.mozilla.org/webrtc/large-data-channel-messages/
-                          //https://lgrahl.de/articles/demystifying-webrtc-dc-size-limit.html
                           const maximumMessageSize = 262118; //65535 <=== 64KiB // 16384 <=== 16KiB to be safe
                           if (e.target.result.length <= maximumMessageSize)
                               sendMessage({

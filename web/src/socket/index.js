@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import config from '../config';
 
-export const initSocket = () => new Promise((res, rej) => {
+export const initSocket = () => new Promise((res) => {
     const socket = io.connect(config.serviceIP, {
         path: "/io/webrtc",
         query: {
@@ -37,8 +37,6 @@ export function socketEvents() {
         });
     });
 
-    // ************************************* //
-    // ************************************* //
     this.socket.on("peer-disconnected", (data) => {
         // close peer-connection with this peer
         this.state.peerConnections[data.socketID].close();
@@ -62,7 +60,6 @@ export function socketEvents() {
                     : null;
 
             return {
-                // remoteStream: remoteStreams.length > 0 && remoteStreams[0].stream || null,
                 remoteStreams,
                 ...selectedVideo,
                 status:
@@ -74,18 +71,13 @@ export function socketEvents() {
     });
 
     this.socket.on("online-peer", (socketID) => {
-        // console.log('connected peers ...', socketID)
-
         // create and send offer to the peer (data.socketID)
         // 1. Create new pc
         this.createPeerConnection(socketID, (pc) => {
             // 2. Create Offer
             if (pc) {
                 // Send Channel
-                const handleSendChannelStatusChange = (event) => {
-                    console.log(
-                        "send channel status: " + this.state.sendChannels[0].readyState
-                    );
+                const handleSendChannelStatusChange = () => {
                 };
 
                 const sendChannel = pc.createDataChannel("sendChannel");
@@ -101,7 +93,6 @@ export function socketEvents() {
                 // Receive Channels
                 const handleReceiveMessage = (event) => {
                     const message = JSON.parse(event.data);
-                    // console.log(message)
                     this.setState((prevState) => {
                         return {
                             messages: [...prevState.messages, message],
@@ -109,23 +100,10 @@ export function socketEvents() {
                     });
                 };
 
-                const handleReceiveChannelStatusChange = (event) => {
-                    if (this.receiveChannel) {
-                        console.log(
-                            "receive channel's status has changed to " +
-                            this.receiveChannel.readyState
-                        );
-                    }
-                };
-
-                const receiveChannelCallback = (event) => {
+                pc.ondatachannel = (event) => {
                     const receiveChannel = event.channel;
                     receiveChannel.onmessage = handleReceiveMessage;
-                    receiveChannel.onopen = handleReceiveChannelStatusChange;
-                    receiveChannel.onclose = handleReceiveChannelStatusChange;
                 };
-
-                pc.ondatachannel = receiveChannelCallback;
 
                 pc.createOffer(this.state.sdpConstraints).then((sdp) => {
                     pc.setLocalDescription(sdp);
@@ -142,28 +120,15 @@ export function socketEvents() {
     this.socket.on("offer", (data) => {
         this.createPeerConnection(data.socketID, (pc) => {
             pc.addStream(this.state.localStream);
-
-            // Send Channel
-            const handleSendChannelStatusChange = (event) => {
-                console.log(
-                    "send channel status: " + this.state.sendChannels[0].readyState
-                );
-            };
-
             const sendChannel = pc.createDataChannel("sendChannel");
-            sendChannel.onopen = handleSendChannelStatusChange;
-            sendChannel.onclose = handleSendChannelStatusChange;
-
             this.setState((prevState) => {
                 return {
                     sendChannels: [...prevState.sendChannels, sendChannel],
                 };
             });
-
             // Receive Channels
             const handleReceiveMessage = (event) => {
                 const message = JSON.parse(event.data);
-                // console.log(message)
                 this.setState((prevState) => {
                     return {
                         messages: [...prevState.messages, message],
@@ -171,30 +136,16 @@ export function socketEvents() {
                 });
             };
 
-            const handleReceiveChannelStatusChange = (event) => {
-                if (this.receiveChannel) {
-                    console.log(
-                        "receive channel's status has changed to " +
-                        this.receiveChannel.readyState
-                    );
-                }
-            };
-
-            const receiveChannelCallback = (event) => {
+            pc.ondatachannel = (event) => {
                 const receiveChannel = event.channel;
                 receiveChannel.onmessage = handleReceiveMessage;
-                receiveChannel.onopen = handleReceiveChannelStatusChange;
-                receiveChannel.onclose = handleReceiveChannelStatusChange;
             };
-
-            pc.ondatachannel = receiveChannelCallback;
 
             pc.setRemoteDescription(new RTCSessionDescription(data.sdp)).then(
                 () => {
                     // 2. Create Answer
                     pc.createAnswer(this.state.sdpConstraints).then((sdp) => {
                         pc.setLocalDescription(sdp);
-
                         this.sendToPeer("answer", sdp, {
                             local: this.socket.id,
                             remote: data.socketID,
@@ -208,7 +159,6 @@ export function socketEvents() {
     this.socket.on("answer", (data) => {
         // get remote's peerConnection
         const pc = this.state.peerConnections[data.socketID];
-        // console.log(data.sdp)
         pc.setRemoteDescription(
             new RTCSessionDescription(data.sdp)
         ).then(() => {});
@@ -217,7 +167,6 @@ export function socketEvents() {
     this.socket.on("candidate", (data) => {
         // get remote's peerConnection
         const pc = this.state.peerConnections[data.socketID];
-
         if (pc) pc.addIceCandidate(new RTCIceCandidate(data.candidate));
     });
-};
+}

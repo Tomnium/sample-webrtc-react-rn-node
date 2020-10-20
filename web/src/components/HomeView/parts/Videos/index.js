@@ -22,7 +22,7 @@ class Videos extends Component {
 
       const NoOfRemoteStreams = nextProps.remoteStreams.length
 
-      let selectedVideo = {};
+      let selectedVideo;
 
       if (NoOfRemoteStreams === 1)
         selectedVideo = { selectedVideo: nextProps.remoteStreams[0] }
@@ -38,11 +38,6 @@ class Videos extends Component {
       let _rVideos = nextProps.remoteStreams.map((rVideo, index) => {
 
         const _videoTrack = rVideo.stream.getTracks().filter(track => track.kind === 'video')
-        // if (_videoTrack.length)
-        //   _videoTrack[0].onmute = () => {
-        //     alert('muted')
-        //   }
-
         let video = _videoTrack && (
           <Video
             videoMuted={this.videoMuted}

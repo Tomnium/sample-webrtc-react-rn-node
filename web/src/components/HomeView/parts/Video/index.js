@@ -22,12 +22,9 @@ class Video extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    // console.log('1. nextProps', this.props.showMuteControls, nextProps.videoStream && nextProps.videoStream.getTracks())
     console.log('1', this.props.videoType, nextProps.videoStream);
 
-    // This is done only once
     if (nextProps.videoStream && nextProps.videoStream !== this.props.videoStream) {
-    // if (!this.props.videoStream) {
       console.log('2', this.props.videoType, nextProps.videoStream);
       this.video.srcObject = nextProps.videoStream
     }
@@ -37,7 +34,6 @@ class Video extends Component {
     if (this.props.videoType === 'remoteVideo' && videoTrack && videoTrack.length) {
 
       videoTrack[0].onmute = () => {
-        // alert('muted')
         this.setState({ videoVisible: false, });
         this.props.videoMuted(nextProps.videoStream)
       };

@@ -75,24 +75,15 @@ class Home extends Component {
             console.log("getUserMedia Error: ", e);
         };
 
-        // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         // see the above link for more constraint options
         const constraints = {
             audio: true,
             video: true,
-            // video: {
-            //   width: 1280,
-            //   height: 720
-            // },
-            // video: {
-            //   width: { min: 1280 },
-            // }
             options: {
                 mirror: true,
             },
         };
 
-        // https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices
             .getUserMedia(constraints)
             .then(success)
@@ -147,7 +138,6 @@ class Home extends Component {
                     // 3. if not, then create new stream and add track
                     _remoteStream = new MediaStream();
                     _remoteStream.addTrack(e.track, _remoteStream);
-
                     remoteVideo = {
                         id: socketID,
                         name: socketID,
@@ -155,13 +145,6 @@ class Home extends Component {
                     };
                     remoteStreams = [...this.state.remoteStreams, remoteVideo];
                 }
-
-                // const remoteVideo = {
-                //   id: socketID,
-                //   name: socketID,
-                //   stream: e.streams[0]
-                // }
-
                 this.setState((prevState) => {
                     // If we already have a stream in display let it stay the same, otherwise use the latest stream
                     // const remoteStream = prevState.remoteStreams.length > 0 ? {} : { remoteStream: e.streams[0] }
@@ -180,32 +163,23 @@ class Home extends Component {
                         : { selectedVideo: remoteVideo };
 
                     return {
-                        // selectedVideo: remoteVideo,
                         ...selectedVideo,
-                        // remoteStream: e.streams[0],
                         ...remoteStream,
-                        remoteStreams, //: [...prevState.remoteStreams, remoteVideo]
+                        remoteStreams,
                     };
                 });
             };
 
             pc.close = () => {
-                // alert('GONE')
-                console.log("pc closed");
             };
 
             if (this.state.localStream)
-            // pc.addStream(this.state.localStream)
-
                 this.state.localStream.getTracks().forEach((track) => {
                     pc.addTrack(track, this.state.localStream);
                 });
-
             // return pc
             callback(pc);
         } catch (e) {
-            console.log("Something went wrong! pc not created!!", e);
-            // return;
             callback(null);
         }
     };
@@ -224,17 +198,13 @@ class Home extends Component {
         this.socket.close();
         // stop local audio & video tracks
         this.stopTracks(localStream);
-
         // stop all remote audio & video tracks
         remoteStreams.forEach((rVideo) => this.stopTracks(rVideo.stream));
-
         // stop all remote peerconnections
         peerConnections &&
         Object.values(peerConnections).forEach((pc) => pc.close());
     };
 
-    // ************************************* //
-    // ************************************* //
     stopTracks = (stream) => stream.getTracks().forEach((track) => track.stop());
 
     render() {
@@ -259,9 +229,7 @@ class Home extends Component {
                 peerConnections={peerConnections}
                 remoteStreams={remoteStreams}
                 sendChannels={sendChannels}
-
                 socket={this.socket}
-
                 switchVideo={this.switchVideo}
                 sendToPeer={this.sendToPeer}
                 updateState={this.updateState}
