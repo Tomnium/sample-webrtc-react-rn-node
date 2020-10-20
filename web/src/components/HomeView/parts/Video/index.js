@@ -22,10 +22,8 @@ class Video extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    console.log('1', this.props.videoType, nextProps.videoStream);
 
     if (nextProps.videoStream && nextProps.videoStream !== this.props.videoStream) {
-      console.log('2', this.props.videoType, nextProps.videoStream);
       this.video.srcObject = nextProps.videoStream
     }
 

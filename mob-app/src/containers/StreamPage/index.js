@@ -51,7 +51,6 @@ class StreamPage extends Component {
 
     getLocalStream = () => {
         const success = (stream) => {
-            console.log('localStream... ', stream.toURL());
             this.setState({
                 localStream: stream,
             });
@@ -65,7 +64,6 @@ class StreamPage extends Component {
 
         let isFront = true;
         mediaDevices.enumerateDevices().then((sourceInfos) => {
-            console.log(sourceInfos);
             let videoSourceId;
             for (let i = 0; i < sourceInfos.length; i++) {
                 const sourceInfo = sourceInfos[i];
@@ -125,9 +123,6 @@ class StreamPage extends Component {
                 }
             };
 
-            pc.oniceconnectionstatechange = (e) => {
-            };
-
             pc.onaddstream = (e) => {
                 let remoteStreams = this.state.remoteStreams;
                 let remoteVideo = {};
@@ -174,8 +169,6 @@ class StreamPage extends Component {
             // return pc
             callback(pc);
         } catch (e) {
-            console.log('Something went wrong! pc not created!!', e);
-            // return;
             callback(null);
         }
     };
