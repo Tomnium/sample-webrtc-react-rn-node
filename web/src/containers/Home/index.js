@@ -43,10 +43,6 @@ class Home extends Component {
         this.socketEvents = socketEvents.bind(this)
     }
 
-    // async componentDidMount() {
-    //     this.socket = await initSocket(this.state.roomId);
-    //     this.socketEvents();
-    // };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!prevState.disconnected && this.state.disconnected) {
@@ -212,6 +208,7 @@ class Home extends Component {
         peerConnections &&
         Object.values(peerConnections).forEach((pc) => pc.close());
         this.setConnect(false)
+        this.updateState({disconnected: false});
     };
 
     stopTracks = (stream) => stream.getTracks().forEach((track) => track.stop());

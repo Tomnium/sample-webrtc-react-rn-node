@@ -39,11 +39,11 @@ class StreamPage extends Component {
                         muted
                     />
                 </Draggable>
-                <br/>
                 <div
                     style={{
                         zIndex: 3,
                         position: "absolute",
+                        top: '15px'
                     }}
                 >
                     <i
