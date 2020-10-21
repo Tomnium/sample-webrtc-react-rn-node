@@ -1,0 +1,28 @@
+.video-wrapper {
+  width: 1600px;
+  height: 80vh;
+  background-color: gray;
+  margin: 0 auto;
+}
+.styled-video {
+  width: 1600px;
+  height: 80vh;
+  background-color: gray;
+  object-fit: cover;
+}
+
+.remote-video-wrapper {
+  backgroundColor: #ffffff12;
+  max-width: 400px;
+  max-height: 400px;
+  border-radius: 5px;
+  float: left;
+  margin: 0 3px;
+}
+
+.remote-video {
+  object-fit: cover;
+  border-radius: 5px;
+  width: 160px;
+  height: 160px;
+}
