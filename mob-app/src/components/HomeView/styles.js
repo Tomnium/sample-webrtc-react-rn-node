@@ -5,10 +5,11 @@ export default styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
         paddingHorizontal: 15,
-    },
+        backgroundColor: 'white',
+},
     caption: {
+        fontFamily: "Barlow-SemiBold",
         padding: 15,
     },
     buttonsContainer: {
@@ -16,15 +17,22 @@ export default styles = StyleSheet.create({
     },
     input: {
         width: 200,
-        color: 'black',
-        fontSize: 18,
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        marginRight: 20,
+        fontFamily: 'FuturaNewDemi-Reg',
+        fontSize: 24,
+        borderRadius: 30,
+        opacity: 0.8,
+        color: '#1f2845',
         backgroundColor: 'white',
-        borderColor: '#000000',
-        borderWidth: 1,
+        borderColor: 'white',
+        borderWidth: 3
     },
     btn: {
-        backgroundColor: 'black',
         paddingHorizontal: 15,
-        paddingVertical: 16
+        paddingVertical: 16,
+        borderRadius: 30,
+        backgroundColor: 'black'
     }
 });
