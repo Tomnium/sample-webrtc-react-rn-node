@@ -10,6 +10,7 @@ import VideoControls from './parts/VideoControls';
 import YourSelfVideo from './parts/YourSelfVideo';
 import SteamsRow from './parts/SteamsRow';
 import styles from './styles';
+import LinearGradient from "react-native-linear-gradient";
 
 class StreamPageView extends Component {
     render() {
@@ -31,6 +32,7 @@ class StreamPageView extends Component {
         return (
             <SafeAreaView style={{flex: 1}}>
                 <StatusBar backgroundColor="teal" barStyle={'dark-content'}/>
+                <LinearGradient colors={['rgba(101,200,208,.63)', 'rgba(188,237,255,.63)']} style={{flex:1}}>
                 <VideoControls
                     camera={camera}
                     mic={mic}
@@ -52,7 +54,9 @@ class StreamPageView extends Component {
                         remoteStreams={remoteStreams}
                     />
                 </View>
-            </SafeAreaView>
+                </LinearGradient>
+                </SafeAreaView>
+
         );
     }
 }

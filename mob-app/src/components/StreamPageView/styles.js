@@ -6,6 +6,5 @@ export default styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         position: 'relative',
-        backgroundColor: 'black'
     },
 });

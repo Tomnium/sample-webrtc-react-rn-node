@@ -15,7 +15,7 @@ class YourSelfVideo extends Component {
                     bottom: 0,
                     zIndex: 99999
                 }}>
-                    <Icon name={mic ? `microphone` : `microphone-off`} size={20} color="white"/>
+                    <Icon name={mic ? `microphone` : `microphone-off`} size={20} color={mic ? "white" : 'red'}/>
                 </View>
                 <View style={{
                     position: 'absolute',
@@ -23,7 +23,7 @@ class YourSelfVideo extends Component {
                     bottom: 0,
                     zIndex: 99999
                 }}>
-                    <Icon name={camera ? `camera` : `camera-off`} size={20} color="white"/>
+                    <Icon name={camera ? `camera` : `camera-off`} size={20} color={camera ? "white" : 'red'}/>
                 </View>
                 <View style={styles.placeHolder}>
                     {camera &&

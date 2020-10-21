@@ -7,6 +7,7 @@ export default styles = StyleSheet.create({
         height: 150,
         right: 0,
         top: 10,
+        zIndex: 1
     },
     rtcView: {
         width: 110,
