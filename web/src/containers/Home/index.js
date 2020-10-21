@@ -208,7 +208,14 @@ class Home extends Component {
         peerConnections &&
         Object.values(peerConnections).forEach((pc) => pc.close());
         this.setConnect(false)
-        this.updateState({disconnected: false});
+        this.setState({
+            peerConnections: {},
+            remoteStreams: [],
+            disconnected: false,
+            localStream: null,
+            remoteStream: null,
+            selectedVideo: null,
+        });
     };
 
     stopTracks = (stream) => stream.getTracks().forEach((track) => track.stop());
