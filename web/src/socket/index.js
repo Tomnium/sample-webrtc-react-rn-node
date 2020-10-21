@@ -2,8 +2,6 @@ import io from 'socket.io-client';
 import config from '../config';
 
 export const initSocket = (roomId) => new Promise((res) => {
-    console.log(window.location.pathname);
-    console.log(`/${roomId}`)
     const socket = io.connect(config.serviceIP, {
         path: "/io/webrtc",
         query: {

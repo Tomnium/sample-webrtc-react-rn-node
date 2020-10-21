@@ -38,7 +38,6 @@ class StreamPage extends Component {
             disconnected: false,
             camera: true,
             mic: true,
-            isYourSelfVideoShown: false
         };
 
         this.socket = props.socket;
@@ -253,7 +252,6 @@ class StreamPage extends Component {
             selectedVideo,
             camera,
             mic,
-            isYourSelfVideoShown
         } = this.state;
 
         return (
@@ -261,7 +259,6 @@ class StreamPage extends Component {
                 camera={camera}
                 mic={mic}
                 localStream={localStream}
-                isYourSelfVideoShown={isYourSelfVideoShown}
                 remoteStreams={remoteStreams}
                 peerConnections={peerConnections}
                 selectedVideo={selectedVideo}
@@ -271,7 +268,6 @@ class StreamPage extends Component {
                 handleCamera={this.handleCamera}
                 handleSound={this.handleSound}
                 sendToPeer={this.sendToPeer}
-                setYourSelfVideoShown={this.setYourSelfVideoShown}
             />
         )
     }

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 
-import {
-    ControlButton,
-} from './styles';
+import {ControlButton} from './styles';
 
 class Video extends Component {
     constructor(props) {
@@ -21,12 +19,9 @@ class Video extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
-
         if (nextProps.videoStream && nextProps.videoStream !== this.props.videoStream) {
             this.video.srcObject = nextProps.videoStream
         }
-
         // This is done only once when we receive a video track
         const videoTrack = nextProps.videoStream && nextProps.videoStream.getVideoTracks();
         if (this.props.videoType === 'remoteVideo' && videoTrack && videoTrack.length) {
@@ -73,16 +68,14 @@ class Video extends Component {
         const {mic, camera, videoVisible} = this.state;
 
         return (
-            <div
-                style={{...frameStyle}}
-            >
+            <div className={frameStyle}>
                 <video
                     id={id}
                     muted={muted}
                     autoPlay
+                    className={videoStyles}
                     style={{
                         visibility: videoVisible && 'visible' || 'hidden',
-                        ...videoStyles,
                     }}
                     ref={(ref) => {
                         this.video = ref

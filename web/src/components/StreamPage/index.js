@@ -4,6 +4,7 @@ import Video from './parts/Video';
 import Videos from './parts/Videos';
 import Chat from './parts/Chat';
 import Draggable from './parts/Draggable';
+import './styles.scss';
 
 class StreamPage extends Component {
     render() {
@@ -20,58 +21,33 @@ class StreamPage extends Component {
         } = this.props;
 
         return (
-            <div>
+            <div className='stream-wrapper'>
                 <Draggable>
                     <Video
                         videoType="localVideo"
-                        videoStyles={{
-                            width: 200,
-                        }}
-                        frameStyle={{
-                            width: 200,
-                            margin: 5,
-                            borderRadius: 5,
-                            backgroundColor: "black",
-                        }}
+                        frameStyle='local-video-wrapper'
+                        videoStyles='local-video'
                         showMuteControls={true}
                         videoStream={localStream}
                         autoPlay
                         muted
                     />
                 </Draggable>
-                <div
-                    style={{
-                        zIndex: 3,
-                        position: "absolute",
-                        top: '15px'
-                    }}
-                >
+                <div>
                     <i
-                        onClick={() => {
-                            updateState({disconnected: true});
-                        }}
-                        style={{cursor: "pointer", paddingLeft: 15, color: "red"}}
-                        className="material-icons"
+                        onClick={() => {updateState({disconnected: true});}}
+                        className="material-icons disconnect-button"
                     >
                         highlight_off
                     </i>
-                    <div
-                        style={{
-                            margin: 10,
-                            backgroundColor: "#cdc4ff4f",
-                            padding: 10,
-                            borderRadius: 5,
-                        }}
-                    >
-                        <div style={{color: "yellow", padding: 5}}>{status}</div>
+                    <div className='info-wrapper'>
+                        <div className='info-text'>{status}</div>
                     </div>
                 </div>
-                <div>
                     <Videos
                         switchVideo={switchVideo}
                         remoteStreams={remoteStreams}
                     />
-                </div>
                 <br/>
 
                 <Chat

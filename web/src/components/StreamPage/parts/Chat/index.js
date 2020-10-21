@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import DragDrop from './dragDrop'
-
+import './styles.scss'
 const Chat = props => {
     const [message, setMessage] = useState('');
     const [user, setUser] = useState({uid: 0,});
-    const [imageZoom, setImageZoom] = useState(false);
-    const [selectedImage, setSelectedImage] = useState('');
 
     const scrollToBottom = () => {
         const chat = document.getElementById("chatList");
@@ -53,18 +50,6 @@ const Chat = props => {
             : (
                 <div className="msg">
                     <p>{message.sender.uid}</p>
-                    <img
-                        onClick={() => {
-                            setImageZoom(true);
-                            setSelectedImage(message.data)
-                        }}
-                        alt={'img'}
-                        className="message"
-                        style={{
-                            width: 200,
-                            cursor: 'pointer',
-                        }}
-                        src={message.data}/>
                 </div>
             );
 
@@ -73,36 +58,7 @@ const Chat = props => {
 
     return (
         <div>
-            {
-                imageZoom
-                && (
-                    <img
-                        src={selectedImage}
-                        style={{
-                            backgroundColor: 'black',
-                            position: 'relative',
-                            zIndex: 100,
-                            display: 'block',
-                            cursor: 'pointer',
-                            marginLeft: 'auto',
-                            marginRight: 'auto',
-                            padding: 20,
-                            borderRadius: 20,
-                        }}
-                        alt={'img'}
-                        onClick={() => setImageZoom(false)}
-                    />
-                )
-            }
-
-            <div className="chatWindow" style={{
-                zIndex: 10,
-                position: 'absolute',
-                right: 5,
-                top: 190,
-                bottom: 140,
-                width: 350,
-            }}>
+            <div className="chatWindow">
                 <ul className="chat" id="chatList">
                     {props.messages.map(data => (
                         <div key={data.id}>
@@ -114,29 +70,6 @@ const Chat = props => {
                         </div>
                     ))}
                 </ul>
-                <DragDrop
-                    className="chatInputWrapper"
-                    sendFiles={(files) => {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            const maximumMessageSize = 262118; //65535 <=== 64KiB // 16384 <=== 16KiB to be safe
-                            if (e.target.result.length <= maximumMessageSize)
-                                sendMessage({
-                                    type: 'image',
-                                    message: {
-                                        id: user.uid,
-                                        sender: {uid: user.uid,},
-                                        data: e.target.result
-                                    }
-                                });
-                            else
-                                alert('Message exceeds Maximum Message Size!')
-                        };
-
-                        reader.readAsDataURL(files[0])
-                    }}
-                >
-                    <div>
                         <form onSubmit={handleSubmit}>
                             <input
                                 className="textarea input"
@@ -146,8 +79,6 @@ const Chat = props => {
                                 value={message}
                             />
                         </form>
-                    </div>
-                </DragDrop>
             </div>
         </div>
     )

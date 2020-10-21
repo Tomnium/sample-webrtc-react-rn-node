@@ -22,10 +22,8 @@ class StreamPageView extends Component {
             handleDisconnect,
             handleCamera,
             handleSound,
-            setYourSelfVideoShown,
             camera,
             mic,
-            isYourSelfVideoShown
         } = this.props;
 
         if (!socket) return <Text>Loading...</Text>;
@@ -41,23 +39,17 @@ class StreamPageView extends Component {
                     handleSound={handleSound}
                 />
                 <View style={styles.videosContainer}>
-                    {isYourSelfVideoShown &&
                     <YourSelfVideo
                         localStream={localStream}
                         camera={camera}
                         mic={mic}
                     />
-                    }
                     <MainVideo
                         selectedVideo={selectedVideo}
                     />
                     <SteamsRow
-                        camera={camera}
-                        mic={mic}
                         switchVideo={switchVideo}
                         remoteStreams={remoteStreams}
-                        localStream={localStream}
-                        setYourSelfVideoShown={setYourSelfVideoShown}
                     />
                 </View>
             </SafeAreaView>

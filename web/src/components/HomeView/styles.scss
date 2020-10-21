@@ -8,11 +8,7 @@
         min-height: 100vh;
         font-size: 18px;
     }
-@media (max-width: 1440px) {
-    .container {
 
-    }
-}
     .caption {
         padding: 15px;
         font-size: 28px;
@@ -52,3 +48,23 @@
         color: white;
     }
 
+    .disconnect-button {
+        cursor: pointer;
+        padding-left: 15px;
+        color: red;
+    }
+
+    .info-wrapper {
+        margin: 10px;
+        background-color: gray;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 3;
+        position: absolute;
+        top: 50px;
+    }
+
+    .info-text {
+        color: yellow;
+        padding: 5px;
+    }

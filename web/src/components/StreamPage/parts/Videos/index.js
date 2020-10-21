@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Video from '../Video'
 
 import {VideosWrapper} from './styles';
-
+import './styles.scss'
 class Videos extends Component {
     constructor(props) {
         super(props);
@@ -41,18 +41,8 @@ class Videos extends Component {
                         videoMuted={this.videoMuted}
                         videoType='remoteVideo'
                         videoStream={rVideo.stream}
-                        frameStyle={{
-                            backgroundColor: '#ffffff12',
-                            maxWidth: 120, maxHeight: 120,
-                            borderRadius: 5,
-                            float: 'left', margin: '0 3px'
-                        }}
-                        videoStyles={{
-                            objectFit: 'cover',
-                            borderRadius: 5,
-                            width: 120, height: 120,
-                            maxWidth: 120, maxHeight: 120,
-                        }}
+                        frameStyle='remote-video-wrapper'
+                        videoStyles='remote-video'
                     />
                 ) || <div/>;
 
@@ -98,26 +88,17 @@ class Videos extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <Video
                     videoType='previewVideo'
-                    frameStyle={{
-                        zIndex: 1,
-                        position: 'fixed',
-                        bottom: 0,
-                        minWidth: '100%', minHeight: '100%',
-                        backgroundColor: 'black'
-                    }}
-                    videoStyles={{
-                        minWidth: '100%', minHeight: '100%',
-                        visibility: this.state.videoVisible && 'visible' || 'hidden',
-                    }}
+                    frameStyle='video-wrapper'
+                    videoStyles='styled-video'
                     videoStream={this.state.selectedVideo && this.state.selectedVideo.stream}
                 />
                 <VideosWrapper>
                     {this.state.rVideos}
                 </VideosWrapper>
-            </div>
+            </>
         )
     }
 
