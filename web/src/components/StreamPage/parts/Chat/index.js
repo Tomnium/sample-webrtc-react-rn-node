@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
+
 import './styles.scss'
+
 const Chat = props => {
     const [message, setMessage] = useState('');
     const [user, setUser] = useState({uid: 0,});
@@ -70,15 +72,15 @@ const Chat = props => {
                         </div>
                     ))}
                 </ul>
-                        <form onSubmit={handleSubmit}>
-                            <input
-                                className="textarea input"
-                                type="text"
-                                placeholder="Enter your message..."
-                                onChange={handleChange}
-                                value={message}
-                            />
-                        </form>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        className="textarea input"
+                        type="text"
+                        placeholder="Enter your message..."
+                        onChange={handleChange}
+                        value={message}
+                    />
+                </form>
             </div>
         </div>
     )

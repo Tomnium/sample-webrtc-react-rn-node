@@ -6,7 +6,6 @@ import OverlayLoader from '../../components/common/OverlayLoader';
 class Layout extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             roomId: '',
             connect: false,

@@ -32,30 +32,30 @@ class StreamPageView extends Component {
         return (
             <SafeAreaView style={{flex: 1}}>
                 <StatusBar backgroundColor="teal" barStyle={'dark-content'}/>
-                <LinearGradient colors={['rgba(101,200,208,.63)', 'rgba(188,237,255,.63)']} style={{flex:1}}>
-                <VideoControls
-                    camera={camera}
-                    mic={mic}
-                    handleDisconnect={handleDisconnect}
-                    handleCamera={handleCamera}
-                    handleSound={handleSound}
-                />
-                <View style={styles.videosContainer}>
-                    <YourSelfVideo
-                        localStream={localStream}
+                <LinearGradient colors={['rgba(101,200,208,.63)', 'rgba(188,237,255,.63)']} style={{flex: 1}}>
+                    <VideoControls
                         camera={camera}
                         mic={mic}
+                        handleDisconnect={handleDisconnect}
+                        handleCamera={handleCamera}
+                        handleSound={handleSound}
                     />
-                    <MainVideo
-                        selectedVideo={selectedVideo}
-                    />
-                    <SteamsRow
-                        switchVideo={switchVideo}
-                        remoteStreams={remoteStreams}
-                    />
-                </View>
+                    <View style={styles.videosContainer}>
+                        <YourSelfVideo
+                            localStream={localStream}
+                            camera={camera}
+                            mic={mic}
+                        />
+                        <MainVideo
+                            selectedVideo={selectedVideo}
+                        />
+                        <SteamsRow
+                            switchVideo={switchVideo}
+                            remoteStreams={remoteStreams}
+                        />
+                    </View>
                 </LinearGradient>
-                </SafeAreaView>
+            </SafeAreaView>
 
         );
     }

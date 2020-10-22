@@ -3,6 +3,7 @@ import Video from '../Video'
 
 import {VideosWrapper} from './styles';
 import './styles.scss'
+
 class Videos extends Component {
     constructor(props) {
         super(props);

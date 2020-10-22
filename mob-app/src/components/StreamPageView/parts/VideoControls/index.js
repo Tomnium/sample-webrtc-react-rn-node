@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View} from "react-native";
+import {Text, TouchableOpacity, View} from "react-native";
 
 import styles from './styles';
 
@@ -15,21 +15,21 @@ class VideoControls extends Component {
 
         return (
             <View style={styles.controlWrapper}>
-                <Button
+                <TouchableOpacity
                     onPress={handleCamera}
-                    title={`camera ${camera ? '(on)' : '(off)'}`}
-                    color={`${camera ? 'black' : 'red'}`}
-                />
-                <Button
+                    style={[styles.controlButton, {backgroundColor: `${camera ? '#09B0F0' : 'red'}`}]}>
+                    <Text style={styles.controlText}>{`camera ${camera ? '(on)' : '(off)'}`}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     onPress={handleSound}
-                    title={`mic ${mic ? '(on)' : '(off)'}`}
-                    color={`${mic ? 'black' : 'red'}`}
-                />
-                <Button
+                    style={[styles.controlButton, {backgroundColor: `${mic ? '#09B0F0' : 'red'}`}]}>
+                    <Text style={styles.controlText}>{`mic ${mic ? '(on)' : '(off)'}`}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
                     onPress={handleDisconnect}
-                    title="X DISCONNECT"
-                    color="red"
-                />
+                    style={styles.disconnectButton}>
+                    <Text style={styles.controlText}>X Disconnect</Text>
+                </TouchableOpacity>
             </View>
         )
     }

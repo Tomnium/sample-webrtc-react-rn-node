@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-import {
-    View,
-} from 'react-native';
+import {View} from 'react-native';
 
-import {
-    RTCView,
-} from 'react-native-webrtc';
+import {RTCView} from 'react-native-webrtc';
 
 class Video extends Component {
 

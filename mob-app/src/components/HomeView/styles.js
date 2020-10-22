@@ -33,6 +33,6 @@ export default styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 16,
         borderRadius: 30,
-        backgroundColor: 'black'
+        backgroundColor: '#09B0F0'
     }
 });

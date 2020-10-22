@@ -35,7 +35,9 @@ class StreamPage extends Component {
                 </Draggable>
                 <div>
                     <i
-                        onClick={() => {updateState({disconnected: true});}}
+                        onClick={() => {
+                            updateState({disconnected: true});
+                        }}
                         className="material-icons disconnect-button"
                     >
                         highlight_off
@@ -44,10 +46,10 @@ class StreamPage extends Component {
                         <div className='info-text'>{status}</div>
                     </div>
                 </div>
-                    <Videos
-                        switchVideo={switchVideo}
-                        remoteStreams={remoteStreams}
-                    />
+                <Videos
+                    switchVideo={switchVideo}
+                    remoteStreams={remoteStreams}
+                />
                 <br/>
 
                 <Chat

@@ -1,70 +1,102 @@
 @import '../web/src/pxrem.scss';
+
 .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(0deg,rgba(101,200,208,.63) -.02%, rgba(188, 237, 255, 0.63) 85.93%),#fff;
-        min-height: 100vh;
-        font-size: 18px;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(0deg, rgba(101,200,208,.63) -.02%, rgba(188, 237, 255, 0.63) 85.93%), #fff;
+  min-height: 100vh;
+  font-size: 18px;
+}
 
-    .caption {
-        padding: 15px;
-        font-size: 28px;
-    };
-    .buttonsContainer {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-end;
-    };
-    .room-input {
-        width: 200px;
-        height: rem(58);
-        padding: rem(19) rem(28);
-        appearance: none;
-        font-size: rem(16);
-        line-height: rem(20);
-        font-family: 'Futura New 600', sans-serif;
-        border-radius: rem(101);
-        box-sizing: border-box;
-        opacity: 0.8;
-        margin-right: rem(20);
-        &:focus, &:active {
-            border: rem(3) solid #09B0F0;
-            opacity: 1;
-        }
-        &:hover {
-            opacity: 1;
-        }
-        &::placeholder {
-            color: #7CB7CB;
-            font-family: 'Futura New 300', serif;
-        }
-    };
-    .btn {
-        background-color: black;
-        padding: 17px;
-        color: white;
-    }
+.caption {
+  padding: 15px;
+  font-size: 28px;
+}
 
-    .disconnect-button {
-        cursor: pointer;
-        padding-left: 15px;
-        color: red;
-    }
+;
+.buttonsContainer {
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
 
-    .info-wrapper {
-        margin: 10px;
-        background-color: gray;
-        padding: 10px;
-        border-radius: 5px;
-        z-index: 3;
-        position: absolute;
-        top: 50px;
-    }
+;
+.room-input {
+  width: 200px;
+  height: rem(58);
+  padding: rem(19) rem(28);
+  appearance: none;
+  font-size: rem(16);
+  line-height: rem(20);
+  font-family: 'Futura New 600', sans-serif;
+  border-radius: rem(101);
+  box-sizing: border-box;
+  opacity: 0.8;
+  margin-right: rem(20);
 
-    .info-text {
-        color: yellow;
-        padding: 5px;
-    }
+  &:focus, &:active {
+    border: rem(3) solid #09B0F0;
+    opacity: 1;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::placeholder {
+    color: #7CB7CB;
+    font-family: 'Futura New 300', serif;
+  }
+}
+
+;
+.btn {
+  padding: rem(15) rem(17);
+  line-height: 153%;
+  background: linear-gradient(0deg, #09B0F0, #09B0F0), linear-gradient(90deg, #09B0F0 -0.08%, #085282 99.87%), #FFFFFF;
+  box-shadow: 0 rem(11) rem(17) rgba(0, 190, 255, 0.34);
+  border-radius: rem(48);
+  outline: none;
+  border: none;
+  font-size: rem(18);
+  color: #ffffff;
+  font-family: 'Futura New 600', sans-serif;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+  &:hover {
+    box-shadow: rem(5) rem(14) rem(20) rgba(0, 191, 255, 0.523);
+    transform: scale(1.02);
+  }
+  &:active {
+    box-shadow: none;
+    transform: scale(0.90);
+    outline: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.disconnect-button {
+  cursor: pointer;
+  padding-left: 15px;
+  color: red;
+}
+
+.info-wrapper {
+  margin: 10px;
+  background-color: gray;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 3;
+  position: absolute;
+  top: 50px;
+}
+
+.info-text {
+  color: yellow;
+  padding: 5px;
+}
