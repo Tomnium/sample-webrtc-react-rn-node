@@ -1,0 +1,31 @@
+@import './pxrem.scss';
+
+@font-face {
+  font-family: 'Futura New 600';
+  src: url('./fonts/FuturaNewDemi-Reg.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Futura New 400', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  outline: none;
+  border: none;
+  resize: none;
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+h2 {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 800;
+  margin: 0;
+  color: #000000;
+  font-size: 54px;
+  white-space: pre-wrap;
+}
